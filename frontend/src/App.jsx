@@ -10,6 +10,7 @@ import { Accounts } from "./pages/Accounts";
 import Backup from "./pages/Backup";
 import { AccountForm } from "./components/AccountForm";
 import { Recovery } from "./pages/Recovery";
+import { NotFound } from "./pages/NotFound";
 import { getToken } from "./utils/auth";
 
 function PublicRoot() {
@@ -38,8 +39,8 @@ function App() {
             <Route path="/recovery/:id" element={<Recovery />} />
             <Route path="/backup" element={<Backup />} />
         </Route>
-        <Route path="*" element={<NotFound />} />
       </Route>
+      <Route path="*" element={<NotFound />} />
     </Routes>
   </BrowserRouter>
   )
