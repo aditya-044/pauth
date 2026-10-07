@@ -29,16 +29,17 @@ function App() {
       </Route>
       <Route path="/register" element={<Register />} />
       <Route path="/login" element={<Login />} />
-          <Route element={<ProtectedRoute />}>
-            <Route element={<MainLayout />}>
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/accounts" element={<Accounts />} />
-              <Route path="/accounts/new" element={<AccountForm />} />
-              <Route path="/accounts/:id/edit" element={<AccountForm />} />
-              <Route path="/recovery/:id" element={<Recovery />} />
-              <Route path="/backup" element={<Backup />} />
-          </Route>
+        <Route element={<ProtectedRoute />}>
+          <Route element={<MainLayout />}>
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/accounts" element={<Accounts />} />
+            <Route path="/accounts/new" element={<AccountForm />} />
+            <Route path="/accounts/:id/edit" element={<AccountForm />} />
+            <Route path="/recovery/:id" element={<Recovery />} />
+            <Route path="/backup" element={<Backup />} />
         </Route>
+        <Route path="*" element={<NotFound />} />
+      </Route>
     </Routes>
   </BrowserRouter>
   )
