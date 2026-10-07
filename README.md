@@ -4,16 +4,21 @@ PAuth is a full-stack authenticator application built with MongoDB, Express.js, 
 
 ## Screenshots
 
-![alt text](docs/screenshots/image-1.png)
+### Landing Page
+
+![PAuth Landing Page](docs/screenshots/image-1.png)
 
 ### Dashboard
-![alt text](docs/screenshots/image-2.png)
+
+![PAuth Dashboard](docs/screenshots/image-2.png)
 
 ### Add Account / QR Code
-![alt text](docs/screenshots/image-3.png)
+
+![Add Authenticator Account](docs/screenshots/image-3.png)
 
 ### Recovery Codes
-![alt text](docs/screenshots/image-4.png)
+
+![PAuth Recovery Codes](docs/screenshots/image.png)
 
 ## Features
 
@@ -102,6 +107,12 @@ auth-app/
 │   ├── .env.example
 │   ├── package.json
 │   └── vite.config.js
+├── docs/
+│   └── screenshots/
+│       ├── image-1.png
+│       ├── image-2.png
+│       ├── image-3.png
+│       └── image.png
 ├── .gitignore
 └── README.md
 ```
@@ -118,10 +129,8 @@ Install the following before running PAuth locally:
 
 ### 1. Clone the repository
 
-Replace the URL below with your actual GitHub repository URL.
-
 ```bash
-git clone https://github.com/YOUR_USERNAME/pauth.git
+git clone https://github.com/aditya-044/pauth.git
 cd pauth
 ```
 
@@ -132,21 +141,21 @@ cd backend
 npm install
 ```
 
-Create a `.env` file from the provided example.
+Create a `.env` file from `.env.example`.
 
-On macOS/Linux:
-
-```bash
-cp .env.example .env
-```
-
-On Windows PowerShell:
+**Windows PowerShell:**
 
 ```powershell
 Copy-Item .env.example .env
 ```
 
-Configure the backend environment variables:
+**Git Bash / macOS / Linux:**
+
+```bash
+cp .env.example .env
+```
+
+Configure your backend environment variables:
 
 ```env
 PORT=5001
@@ -158,15 +167,17 @@ MONGODB_URI=mongodb://localhost:27017/authenticator-app
 JWT_SECRET=replace-with-a-strong-random-secret
 JWT_EXPIRE=7d
 
-ENCRYPTION_KEY=replace-with-32-random-characters
+ENCRYPTION_KEY=replace-with-exactly-32-characters
 
 RATE_LIMIT_WINDOW_MS=900000
 RATE_LIMIT_MAX_REQUESTS=100
 ```
 
-Use a valid, randomly generated 32-character encryption key and a strong JWT secret. Follow the project's environment validation requirements.
+Replace the placeholder values with appropriate local configuration. The encryption key must contain exactly 32 characters for this project's encryption implementation.
 
-If you use MongoDB Atlas, replace `MONGODB_URI` with your Atlas connection string. Never commit real credentials.
+If you use MongoDB Atlas, replace `MONGODB_URI` with your Atlas connection string.
+
+**Never commit real credentials, `.env` files, JWT secrets, or encryption keys.**
 
 ### 3. Start the backend
 
@@ -176,7 +187,7 @@ From the `backend` directory, run:
 npm run dev
 ```
 
-If the project does not define a `dev` script, use the start command specified in `backend/package.json`.
+Use the start command defined in `backend/package.json` if a development script is not available.
 
 The backend is expected to run at:
 
@@ -192,14 +203,14 @@ http://localhost:5001/api/health
 
 ### 4. Configure the frontend
 
-Open a second terminal:
+Open a second terminal in the project root:
 
 ```bash
 cd frontend
 npm install
 ```
 
-Create `frontend/.env` using the provided example.
+Create `frontend/.env` with:
 
 ```env
 VITE_API_URL=http://localhost:5001/api
@@ -209,7 +220,7 @@ The frontend API URL must point to the backend API.
 
 ### 5. Start the frontend
 
-From the `frontend` directory:
+From the `frontend` directory, run:
 
 ```bash
 npm run dev
@@ -227,13 +238,13 @@ Register an account and sign in to start using PAuth.
 
 1. Register and log in.
 2. Add an authenticator account using the required account details and TOTP secret.
-3. View the generated OTP and its countdown timer.
+3. View generated OTPs and their countdown timers.
 4. Use the verification feature to check an OTP.
-5. Save newly generated recovery codes securely when they are displayed.
+5. Save newly generated recovery codes securely when displayed.
 6. Export an encrypted backup when needed.
 7. Import a backup to restore accounts. Existing accounts are skipped rather than duplicated.
 
-**Important:** Treat authenticator secrets, recovery codes, and backup files as sensitive credentials. Keep them private and store backups securely.
+**Important:** Authenticator secrets, recovery codes, and backup files are sensitive credentials. Keep them private and store backups securely.
 
 ## Environment Variables
 
@@ -245,12 +256,12 @@ Register an account and sign in to start using PAuth.
 | `MONGODB_URI` | MongoDB connection string |
 | `JWT_SECRET` | Secret used to sign JWTs |
 | `JWT_EXPIRE` | JWT expiration period |
-| `ENCRYPTION_KEY` | Key used for encrypting authenticator secrets |
+| `ENCRYPTION_KEY` | Key used to encrypt authenticator secrets |
 | `RATE_LIMIT_WINDOW_MS` | Rate-limit time window |
 | `RATE_LIMIT_MAX_REQUESTS` | Maximum requests in the configured window |
 | `VITE_API_URL` | Frontend API base URL |
 
-Only frontend variables prefixed with `VITE_` should be considered browser-visible. Never place backend secrets in frontend environment variables.
+Only frontend variables prefixed with `VITE_` should be considered browser-visible. Never put backend secrets in frontend environment variables.
 
 ## API Overview
 
@@ -291,19 +302,7 @@ Account endpoints require authentication unless explicitly documented otherwise.
 
 | Method | Endpoint | Purpose |
 |---|---|---|
-| GET | `/health` | Check backend availability |
-
-The health endpoint is available at `/api/health`.
-
-## Security Notes
-
-- Never commit `.env` files, credentials, JWT secrets, or encryption keys.
-- Use HTTPS and strong secrets in production.
-- Restrict database access and protect MongoDB credentials.
-- Keep dependencies updated.
-- Store recovery codes and backup files securely.
-- Protect access to exported backups, including their decryption material.
-- Review authentication, recovery-code consumption, and backup-import behavior before public deployment.
+| GET | `/api/health` | Check backend availability |
 
 ## Deployment
 
@@ -313,7 +312,7 @@ The planned deployment architecture is:
 - **Backend:** Render
 - **Database:** MongoDB Atlas
 
-Production deployment requires configuring the appropriate environment variables, frontend origin, database access, and HTTPS.
+Production deployment requires the appropriate environment variables, database access, frontend origin, and HTTPS configuration.
 
 ## Contributing
 
@@ -323,7 +322,7 @@ Contributions are welcome.
 2. Create a feature branch.
 3. Make focused changes.
 4. Test your changes.
-5. Open a pull request describing the changes.
+5. Open a pull request describing your changes.
 
 ## License
 
