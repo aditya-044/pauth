@@ -6,7 +6,7 @@ PAuth is a full-stack authenticator application built with MongoDB, Express.js, 
 
 ### Landing Page
 
-![PAuth Landing Page](docs/screenshots/image-1.png)
+![PAuth Landing Page](docs/screenshots/image.png)
 
 ### Dashboard
 
